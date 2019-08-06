@@ -5,3 +5,4 @@ django graphql demo
 * graphql
 * django rest framework
 * relay
+* jwt auth
