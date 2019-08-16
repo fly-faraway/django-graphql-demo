@@ -33,7 +33,25 @@ class Node(relay.Node):
     @classmethod
     def Field(cls, *args, **kwargs):
         return NodeField(cls, *args, **kwargs)
+    @classmethod
+    def get_node_from_global_id(cls, info, global_id, only_type=None):
+        try:
+            _type, _id = cls.from_global_id(global_id)
+            graphene_type = info.schema.get_type(_type).graphene_type
+        except Exception:
+            import traceback
+            print(traceback.format_exc())
+            return None
 
+        if only_type:
+            assert graphene_type == only_type, ("Must receive a {} id.").format(
+                only_type._meta.name
+            )
+
+        get_node = getattr(graphene_type, "get_node", None)
+        if get_node:
+            return get_node(info, _id)
+        
 
 class TotalCountConnection(Connection):
     total_count = graphene.Int()
