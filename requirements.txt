@@ -2,7 +2,7 @@ aniso8601==6.0.0
 Django==2.2.3
 django-filter==2.2.0
 django-graphql-jwt==0.2.1
-djangorestframework==3.10.2
+djangorestframework==3.11.2
 graphene==2.1.7
 graphene-django==2.4.0
 graphql-core==2.2.1
